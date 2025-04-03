@@ -1,9 +1,9 @@
-#include "Ejercicio1.h"
+#include "PrimerEjercicio.h"
 #include "Box2DHelper.h"
 #include <iostream>
 
-
-Ejercicio1::Ejercicio1(int ancho, int alto, std::string titulo)
+// Constructor de la clase Game
+PrimerEjercicio::PrimerEjercicio(int ancho, int alto, std::string titulo)
 {
     // Inicialización de la ventana y configuración de propiedades
     wnd = new RenderWindow(VideoMode(ancho, alto), titulo);
@@ -16,7 +16,7 @@ Ejercicio1::Ejercicio1(int ancho, int alto, std::string titulo)
 }
 
 // Bucle principal del juego
-void Ejercicio1::Loop()
+void PrimerEjercicio::Loop()
 {
     while (wnd->isOpen())
     {
@@ -30,7 +30,7 @@ void Ejercicio1::Loop()
 }
 
 // Actualización de la simulación física
-void Ejercicio1::UpdatePhysics()
+void PrimerEjercicio::UpdatePhysics()
 {
     phyWorld->Step(frameTime, 8, 8); // Simular el mundo físico
     phyWorld->ClearForces(); // Limpiar las fuerzas aplicadas a los cuerpos
@@ -38,7 +38,7 @@ void Ejercicio1::UpdatePhysics()
 }
 
 // Dibujo de los elementos del juego
-void Ejercicio1::DrawGame()
+void PrimerEjercicio::DrawGame()
 {
     // Dibujar el suelo
     sf::RectangleShape groundShape(sf::Vector2f(500, 5));
@@ -65,7 +65,7 @@ void Ejercicio1::DrawGame()
 }
 
 // Procesamiento de eventos de entrada
-void Ejercicio1::DoEvents()
+void PrimerEjercicio::DoEvents()
 {
     Event evt;
     while (wnd->pollEvent(evt))
@@ -100,13 +100,13 @@ void Ejercicio1::DoEvents()
 }
 
 // Comprobación de colisiones (a implementar más adelante)
-void Ejercicio1::CheckCollitions()
+void PrimerEjercicio::CheckCollitions()
 {
     // Implementación de la comprobación de colisiones
 }
 
 // Configuración de la vista del juego
-void Ejercicio1::SetZoom()
+void PrimerEjercicio::SetZoom()
 {
     View camara;
     // Posicionamiento y tamaño de la vista
@@ -116,7 +116,7 @@ void Ejercicio1::SetZoom()
 }
 
 // Inicialización del motor de física y los cuerpos del mundo físico
-void Ejercicio1::InitPhysics()
+void PrimerEjercicio::InitPhysics()
 {
     // Inicializar el mundo físico con la gravedad por defecto
     phyWorld = new b2World(b2Vec2(0.0f, 9.8f));
@@ -143,6 +143,6 @@ void Ejercicio1::InitPhysics()
 
 // Destructor de la clase
 
-Ejercicio1::~Ejercicio1(void)
+PrimerEjercicio::~PrimerEjercicio(void)
 {
 }

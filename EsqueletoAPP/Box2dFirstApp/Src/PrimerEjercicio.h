@@ -5,8 +5,7 @@
 #include <list>
 
 using namespace sf;
-
-class Ejercicio1
+class PrimerEjercicio
 {
 private:
 	// Propiedades de la ventana
@@ -42,4 +41,3 @@ public:
 	void DoEvents();
 	void SetZoom();
 };
-
