@@ -30,3 +30,20 @@
 *.exe
 *.out
 *.app
+
+# Archivos generados por Visual Studio
+*.suo
+*.VC.db
+*.VC.opendb
+*.vsidx
+*.ipch
+*.pdb
+*.idb
+*.tlog
+
+# Archivos temporales y de caché
+*.db
+*.db-shm
+*.db-wal
+*.vscode/
+.vs/
