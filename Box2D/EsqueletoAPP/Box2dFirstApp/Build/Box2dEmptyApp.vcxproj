@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="..\Src\Box2DHelper.h" />
     <ClInclude Include="..\Src\Game.h" />
-    <ClInclude Include="..\Src\PrimerEjercicio.h" />
     <ClInclude Include="..\Src\SFMLRenderer.h" />
   </ItemGroup>
   <ItemGroup>

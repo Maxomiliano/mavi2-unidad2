@@ -57,8 +57,9 @@ void Game::DrawGame()
     rightWallShape.setPosition(90, 0); // X = 90 para que comience donde termina el suelo
     wnd->draw(rightWallShape);
 
+
     // Dibujar el cuerpo de control (c�rculo)
-    sf::CircleShape controlShape(5);
+    sf::RectangleShape controlShape(sf::Vector2f(100,100));
     controlShape.setFillColor(sf::Color::Magenta);
     controlShape.setPosition(controlBody->GetPosition().x - 5, controlBody->GetPosition().y - 5);
     wnd->draw(controlShape);
@@ -84,19 +85,6 @@ void Game::DoEvents()
             break;
         }
     }
-    
-    // Controlar el movimiento del cuerpo de control con el teclado
-    // Segun la numeracion usada, cuando mas cerca de cero mas 
-    // lento es el desplazamiento sobre ese eje
-    controlBody->SetAwake(true);
-    if (Keyboard::isKeyPressed(Keyboard::Left))
-        controlBody->SetLinearVelocity(b2Vec2(-30.0f, 0.0f));
-    if (Keyboard::isKeyPressed(Keyboard::Right))
-        controlBody->SetLinearVelocity(b2Vec2(30.0f, 0.0f));
-    if (Keyboard::isKeyPressed(Keyboard::Down))
-        controlBody->SetLinearVelocity(b2Vec2(0.0f, 30.0f));
-    if (Keyboard::isKeyPressed(Keyboard::Up))
-        controlBody->SetLinearVelocity(b2Vec2(0.0f, -30.0f));
 }
 
 // Comprobaci�n de colisiones (a implementar m�s adelante)
@@ -110,8 +98,8 @@ void Game::SetZoom()
 {
     View camara;
     // Posicionamiento y tama�o de la vista
-    camara.setSize(100.0f, 100.0f);
-    camara.setCenter(50.0f, 50.0f);
+    camara.setSize(800.0f, 600.0f);
+    camara.setCenter(400.0f, 300.0f);
     wnd->setView(camara); // Asignar la vista a la ventana
 }
 
@@ -127,18 +115,18 @@ void Game::InitPhysics()
     phyWorld->SetDebugDraw(debugRender);
 
     // Crear el suelo y las paredes est�ticas del mundo f�sico
-    b2Body* groundBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 100, 10);
-    groundBody->SetTransform(b2Vec2(50.0f, 100.0f), 0.0f);
+    b2Body* groundBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 800, 20);
+    groundBody->SetTransform(b2Vec2(400.0f, 600.0f), 0.0f);
 
-    b2Body* leftWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 10, 100);
-    leftWallBody->SetTransform(b2Vec2(0.0f, 50.0f), 0.0f);
+    b2Body* leftWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 20, 600);
+    leftWallBody->SetTransform(b2Vec2(0.0f, 300.0f), 0.0f);
 
-    b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 10, 100);
-    rightWallBody->SetTransform(b2Vec2(100.0f, 50.0f), 0.0f);
+    b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 20, 800);
+    rightWallBody->SetTransform(b2Vec2(800.0f, 300.0f), 0.0f);
 
     // Crear un c�rculo que se controlar� con el teclado
-    controlBody = Box2DHelper::CreateCircularDynamicBody(phyWorld, 5, 1.0f, 0.5, 0.1f);
-    controlBody->SetTransform(b2Vec2(50.0f, 50.0f), 0.0f);
+    controlBody = Box2DHelper::CreateRectangularDynamicBody(phyWorld, 100.0f, 100.0f, 5, 0.1f, 0.1f);
+    controlBody->SetTransform(b2Vec2(400.0f, 300.0f), 0.0f);
 }
 
 // Destructor de la clase

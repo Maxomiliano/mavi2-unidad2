@@ -1,0 +1,16 @@
+﻿  Game.cpp
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Box2dFirstApp - copia\Src\Game.cpp(50,55): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Box2dFirstApp - copia\Src\Game.cpp(55,56): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Box2dFirstApp - copia\Src\Game.cpp(101,27): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Box2dFirstApp - copia\Src\Game.cpp(101,20): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Box2dFirstApp - copia\Src\Game.cpp(102,39): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Box2dFirstApp - copia\Src\Game.cpp(102,28): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Box2dEmptyApp.vcxproj -> D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Box2dFirstApp - copia\Bin\Debug\Ejercicio2.exe
