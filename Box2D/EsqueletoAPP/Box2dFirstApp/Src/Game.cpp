@@ -5,14 +5,14 @@
 // Constructor de la clase Game
 Game::Game(int ancho, int alto, std::string titulo)
 {
-    // Inicialización de la ventana y configuración de propiedades
+    // Inicializaciï¿½n de la ventana y configuraciï¿½n de propiedades
     wnd = new RenderWindow(VideoMode(ancho, alto), titulo);
     wnd->setVisible(true);
     fps = 60;
     wnd->setFramerateLimit(fps);
     frameTime = 1.0f / fps;
-    SetZoom(); // Configuración de la vista del juego
-    InitPhysics(); // Inicialización del motor de física
+    SetZoom(); // Configuraciï¿½n de la vista del juego
+    InitPhysics(); // Inicializaciï¿½n del motor de fï¿½sica
 }
 
 // Bucle principal del juego
@@ -23,18 +23,18 @@ void Game::Loop()
         wnd->clear(clearColor); // Limpiar la ventana
         DoEvents(); // Procesar eventos de entrada
         CheckCollitions(); // Comprobar colisiones
-        UpdatePhysics(); // Actualizar la simulación física
+        UpdatePhysics(); // Actualizar la simulaciï¿½n fï¿½sica
         DrawGame(); // Dibujar el juego
         wnd->display(); // Mostrar la ventana
     }
 }
 
-// Actualización de la simulación física
+// Actualizaciï¿½n de la simulaciï¿½n fï¿½sica
 void Game::UpdatePhysics()
 {
-    phyWorld->Step(frameTime, 8, 8); // Simular el mundo físico
+    phyWorld->Step(frameTime, 8, 8); // Simular el mundo fï¿½sico
     phyWorld->ClearForces(); // Limpiar las fuerzas aplicadas a los cuerpos
-    phyWorld->DebugDraw(); // Dibujar el mundo físico para depuración
+    phyWorld->DebugDraw(); // Dibujar el mundo fï¿½sico para depuraciï¿½n
 }
 
 // Dibujo de los elementos del juego
@@ -57,7 +57,7 @@ void Game::DrawGame()
     rightWallShape.setPosition(90, 0); // X = 90 para que comience donde termina el suelo
     wnd->draw(rightWallShape);
 
-    // Dibujar el cuerpo de control (círculo)
+    // Dibujar el cuerpo de control (cï¿½rculo)
     sf::CircleShape controlShape(5);
     controlShape.setFillColor(sf::Color::Magenta);
     controlShape.setPosition(controlBody->GetPosition().x - 5, controlBody->GetPosition().y - 5);
@@ -73,12 +73,12 @@ void Game::DoEvents()
         switch (evt.type)
         {
         case Event::Closed:
-            wnd->close(); // Cerrar la ventana si se presiona el botón de cerrar
+            wnd->close(); // Cerrar la ventana si se presiona el botï¿½n de cerrar
             break;
         case Event::MouseButtonPressed:
-            // Crear un cuerpo dinámico triangular en la posición del ratón
+            // Crear un cuerpo dinï¿½mico triangular en la posiciï¿½n del ratï¿½n
             b2Body* body = Box2DHelper::CreateTriangularDynamicBody(phyWorld, b2Vec2(0.0f, 0.0f), 10.0f, 1.0f, 4.0f, 0.1f);
-            // Transformar las coordenadas según la vista activa
+            // Transformar las coordenadas segï¿½n la vista activa
             Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
             body->SetTransform(b2Vec2(pos.x, pos.y), 0.0f);
             break;
@@ -89,37 +89,44 @@ void Game::DoEvents()
     // Segun la numeracion usada, cuando mas cerca de cero mas 
     // lento es el desplazamiento sobre ese eje
     controlBody->SetAwake(true);
-
+    if (Keyboard::isKeyPressed(Keyboard::Left))
+        controlBody->SetLinearVelocity(b2Vec2(-30.0f, 0.0f));
+    if (Keyboard::isKeyPressed(Keyboard::Right))
+        controlBody->SetLinearVelocity(b2Vec2(30.0f, 0.0f));
+    if (Keyboard::isKeyPressed(Keyboard::Down))
+        controlBody->SetLinearVelocity(b2Vec2(0.0f, 30.0f));
+    if (Keyboard::isKeyPressed(Keyboard::Up))
+        controlBody->SetLinearVelocity(b2Vec2(0.0f, -30.0f));
 }
 
-// Comprobación de colisiones (a implementar más adelante)
+// Comprobaciï¿½n de colisiones (a implementar mï¿½s adelante)
 void Game::CheckCollitions()
 {
-    // Implementación de la comprobación de colisiones
+    // Implementaciï¿½n de la comprobaciï¿½n de colisiones
 }
 
-// Configuración de la vista del juego
+// Configuraciï¿½n de la vista del juego
 void Game::SetZoom()
 {
     View camara;
-    // Posicionamiento y tamaño de la vista
+    // Posicionamiento y tamaï¿½o de la vista
     camara.setSize(100.0f, 100.0f);
     camara.setCenter(50.0f, 50.0f);
     wnd->setView(camara); // Asignar la vista a la ventana
 }
 
-// Inicialización del motor de física y los cuerpos del mundo físico
+// Inicializaciï¿½n del motor de fï¿½sica y los cuerpos del mundo fï¿½sico
 void Game::InitPhysics()
 {
-    // Inicializar el mundo físico con la gravedad por defecto
+    // Inicializar el mundo fï¿½sico con la gravedad por defecto
     phyWorld = new b2World(b2Vec2(0.0f, 9.8f));
 
-    // Crear un renderer de debug para visualizar el mundo físico
+    // Crear un renderer de debug para visualizar el mundo fï¿½sico
     debugRender = new SFMLRenderer(wnd);
     debugRender->SetFlags(UINT_MAX);
     phyWorld->SetDebugDraw(debugRender);
 
-    // Crear el suelo y las paredes estáticas del mundo físico
+    // Crear el suelo y las paredes estï¿½ticas del mundo fï¿½sico
     b2Body* groundBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 100, 10);
     groundBody->SetTransform(b2Vec2(50.0f, 100.0f), 0.0f);
 
@@ -129,7 +136,7 @@ void Game::InitPhysics()
     b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 10, 100);
     rightWallBody->SetTransform(b2Vec2(100.0f, 50.0f), 0.0f);
 
-    // Crear un círculo que se controlará con el teclado
+    // Crear un cï¿½rculo que se controlarï¿½ con el teclado
     controlBody = Box2DHelper::CreateCircularDynamicBody(phyWorld, 5, 1.0f, 0.5, 0.1f);
     controlBody->SetTransform(b2Vec2(50.0f, 50.0f), 0.0f);
 }
