@@ -40,10 +40,11 @@ void Game::UpdatePhysics()
 // Dibujo de los elementos del juego
 void Game::DrawGame()
 {
+    /*
     // Dibujar el suelo
-    sf::RectangleShape groundShape(sf::Vector2f(500, 5));
+    sf::RectangleShape groundShape(sf::Vector2f(800, 20));
     groundShape.setFillColor(sf::Color::Red);
-    groundShape.setPosition(0, 95);
+    groundShape.setPosition(400, 580);
     wnd->draw(groundShape);
 
     // Dibujar las paredes
@@ -61,8 +62,9 @@ void Game::DrawGame()
     // Dibujar el cuerpo de control (c�rculo)
     sf::RectangleShape controlShape(sf::Vector2f(100,100));
     controlShape.setFillColor(sf::Color::Magenta);
-    controlShape.setPosition(controlBody->GetPosition().x - 5, controlBody->GetPosition().y - 5);
+    controlShape.setPosition(controlBody->GetPosition().x - 50, controlBody->GetPosition().y - 50);
     wnd->draw(controlShape);
+    */
 }
 
 // Procesamiento de eventos de entrada
@@ -78,7 +80,7 @@ void Game::DoEvents()
             break;
         case Event::MouseButtonPressed:
             // Crear un cuerpo din�mico triangular en la posici�n del rat�n
-            b2Body* body = Box2DHelper::CreateTriangularDynamicBody(phyWorld, b2Vec2(0.0f, 0.0f), 10.0f, 1.0f, 4.0f, 0.1f);
+            b2Body* body = Box2DHelper::CreateTriangularDynamicBody(phyWorld, b2Vec2(0.0f, 0.0f), 30.0f, 1.0f, 4.0f, 0.1f);
             // Transformar las coordenadas seg�n la vista activa
             Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
             body->SetTransform(b2Vec2(pos.x, pos.y), 0.0f);
