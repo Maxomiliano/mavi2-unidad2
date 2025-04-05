@@ -38,34 +38,7 @@ void Game::UpdatePhysics()
 }
 
 // Dibujo de los elementos del juego
-void Game::DrawGame()
-{
-    /*
-    // Dibujar el suelo
-    sf::RectangleShape groundShape(sf::Vector2f(800, 20));
-    groundShape.setFillColor(sf::Color::Red);
-    groundShape.setPosition(400, 580);
-    wnd->draw(groundShape);
-
-    // Dibujar las paredes
-    sf::RectangleShape leftWallShape(sf::Vector2f(10, alto)); // Alto de la ventana
-    leftWallShape.setFillColor(sf::Color::Blue);
-    leftWallShape.setPosition(100, 0); // X = 100 para que comience donde termina el suelo
-    wnd->draw(leftWallShape);
-
-    sf::RectangleShape rightWallShape(sf::Vector2f(10, alto)); // Alto de la ventana
-    rightWallShape.setFillColor(sf::Color::Cyan);
-    rightWallShape.setPosition(90, 0); // X = 90 para que comience donde termina el suelo
-    wnd->draw(rightWallShape);
-
-
-    // Dibujar el cuerpo de control (c�rculo)
-    sf::RectangleShape controlShape(sf::Vector2f(100,100));
-    controlShape.setFillColor(sf::Color::Magenta);
-    controlShape.setPosition(controlBody->GetPosition().x - 50, controlBody->GetPosition().y - 50);
-    wnd->draw(controlShape);
-    */
-}
+void Game::DrawGame() {}
 
 // Procesamiento de eventos de entrada
 void Game::DoEvents()
@@ -77,13 +50,6 @@ void Game::DoEvents()
         {
         case Event::Closed:
             wnd->close(); // Cerrar la ventana si se presiona el bot�n de cerrar
-            break;
-        case Event::MouseButtonPressed:
-            // Crear un cuerpo din�mico triangular en la posici�n del rat�n
-            b2Body* body = Box2DHelper::CreateTriangularDynamicBody(phyWorld, b2Vec2(0.0f, 0.0f), 30.0f, 1.0f, 4.0f, 0.1f);
-            // Transformar las coordenadas seg�n la vista activa
-            Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
-            body->SetTransform(b2Vec2(pos.x, pos.y), 0.0f);
             break;
         }
     }
