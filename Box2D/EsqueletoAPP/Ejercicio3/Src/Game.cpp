@@ -13,7 +13,7 @@ Game::Game(int ancho, int alto, std::string titulo)
     frameTime = 1.0f / fps;
     SetZoom(); // Configuraci�n de la vista del juego
     InitPhysics(); // Inicializaci�n del motor de f�sica
-    controlBody->ApplyLinearImpulse(b2Vec2(1000, 10), b2Vec2(50, 50), true);
+    controlBody->ApplyLinearImpulse(b2Vec2(10000, 10), b2Vec2(50, 50), true);
 }
 
 // Bucle principal del juego
@@ -95,6 +95,16 @@ void Game::InitPhysics()
 
     b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 10, 100);
     rightWallBody->SetTransform(b2Vec2(100.0f, 50.0f), 0.0f);
+
+    b2Body* squareObstacleBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 10, 10);
+	squareObstacleBody->SetTransform(b2Vec2(80.0f, 50.0f), 0.0f);
+
+	b2Body* triangleObstacleBody = Box2DHelper::CreateTriangularStaticBody(phyWorld, b2Vec2(5,5), 10);
+	triangleObstacleBody->SetTransform(b2Vec2(20.0f, 30.0f), 0.0f);
+
+	b2Body* circleObstacleBody = Box2DHelper::CreateCircularStaticBody(phyWorld, 5);
+	circleObstacleBody->SetTransform(b2Vec2(40.0f, 70.0f), 0.0f);
+
 
     // Crear un c�rculo que se controlar� con el teclado
     controlBody = Box2DHelper::CreateCircularDynamicBody(phyWorld, 5, 1.0f, 0.5, 1.0f);
