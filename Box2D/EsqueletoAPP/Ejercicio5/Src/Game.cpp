@@ -117,7 +117,7 @@ void Game::InitPhysics()
 	rightWallBody->SetTransform(b2Vec2(100.0f, 50.0f), 0.0f);
 
 	// Crear un c�rculo que se controlar� con el teclado
-	controlBody = Box2DHelper::CreateRectangularDynamicBody(phyWorld, 10, 10, 1, 0.03f, 0.1f);
+	controlBody = Box2DHelper::CreateRectangularDynamicBody(phyWorld, 10, 10, 1, 0, 0);
 	controlBody->SetTransform(b2Vec2(20.0f, 80.0f), 0.0f);
 }
 
