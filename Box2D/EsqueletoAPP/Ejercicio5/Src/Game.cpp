@@ -13,7 +13,6 @@ Game::Game(int ancho, int alto, std::string titulo)
 	frameTime = 1.0f / fps;
 	SetZoom(); // Configuraci�n de la vista del juego
 	InitPhysics(); // Inicializaci�n del motor de f�sica
-	//controlBody->ApplyLinearImpulse(b2Vec2(10000, 10), b2Vec2(50, 50), true);
 }
 
 // Bucle principal del juego
@@ -54,16 +53,6 @@ void Game::DoEvents()
 			break;
 		}
 	}
-
-	controlBody->SetAwake(true);
-	if (Keyboard::isKeyPressed(Keyboard::Left))
-	{
-		controlBody->ApplyForce(b2Vec2(-200, 0), controlBody->GetWorldCenter(), true);
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Right))
-	{
-		controlBody->ApplyForce(b2Vec2(200, 0), controlBody->GetWorldCenter(), true);
-	}
 }
 
 // Comprobaci�n de colisiones (a implementar m�s adelante)
@@ -94,12 +83,29 @@ void Game::InitPhysics()
 	phyWorld->SetDebugDraw(debugRender);
 
 	// Crear el suelo y las paredes est�ticas del mundo f�sico
-	//b2Body* groundBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 100, 10);
-	//groundBody->SetTransform(b2Vec2(50.0f, 100.0f), 0.0f);
 	b2Body* groundBody = Box2DHelper::CreateStaticBody(phyWorld);
 	b2FixtureDef box = Box2DHelper::CreateRectangularFixtureDef(100, 10, 0.0f, 0.03f, 0.0f);
+	float angle = b2_pi / 12.0f;
 	groundBody->CreateFixture(&box);
-	groundBody->SetTransform(b2Vec2(50.0f, 100.0f), 0.0f);
+	groundBody->SetTransform(b2Vec2(50.0f, 90.0f), angle);
+	/*
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_staticBody;
+	bodyDef.position = b2Vec2(50, 90);
+	bodyDef.angle = b2_pi / 6.0f;
+	b2Body* groundBody = phyWorld->CreateBody(&bodyDef);
+
+
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(60.0f, 4.0f);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &boxShape;
+	fixtureDef.density = 0.0f;
+	fixtureDef.friction = 0.5f;
+
+	groundBody->CreateFixture(&fixtureDef);
+	*/
 
 	b2Body* ceilingBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 100, 10);
 	ceilingBody->SetTransform(b2Vec2(50.0f, 0.0f), 0.0f);
@@ -112,7 +118,7 @@ void Game::InitPhysics()
 
 	// Crear un c�rculo que se controlar� con el teclado
 	controlBody = Box2DHelper::CreateRectangularDynamicBody(phyWorld, 10, 10, 1, 0.03f, 0.1f);
-	controlBody->SetTransform(b2Vec2(50.0f, 90.0f), 0.0f);
+	controlBody->SetTransform(b2Vec2(20.0f, 80.0f), 0.0f);
 }
 
 // Destructor de la clase
