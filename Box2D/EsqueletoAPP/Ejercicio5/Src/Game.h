@@ -24,6 +24,7 @@ private:
 
 	// Cuerpo de box2d
 	b2Body* controlBody;
+	b2Body* cannonBody;
 
 public:
 

@@ -1,0 +1,7 @@
+﻿  Box2dEmptyApp.cpp
+  Game.cpp
+  SFMLRenderer.cpp
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Ejercicio5\Src\SFMLRenderer.cpp(121,25): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Ejercicio5\Src\SFMLRenderer.cpp(121,22): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Generando código...
+  Box2dEmptyApp.vcxproj -> D:\Max\FACU\Materias\Segundo Año\Modelos y Algoritmos para Videojuegos II\Unidad2 - Repo\mavi2-unidad2\Box2D\EsqueletoAPP\Ejercicio5\Bin\Debug\Ejercicio6.exe

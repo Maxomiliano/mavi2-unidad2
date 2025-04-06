@@ -51,6 +51,23 @@ void Game::DoEvents()
 		case Event::Closed:
 			wnd->close(); // Cerrar la ventana si se presiona el bot�n de cerrar
 			break;
+
+		case Event::MouseButtonPressed:
+			float angle = cannonBody->GetAngle();
+			b2Vec2 direction(std::cos(angle), std::sin(angle));
+
+			float impulseMagnitude = 1000.0f;
+			b2Vec2 impulse = impulseMagnitude * direction;
+
+			//b2Vec2 cannonPosition = cannonBody->GetPosition();
+			//b2Vec2 spawnPosition = cannonPosition + 9.0f * direction;
+
+			//controlBody->SetTransform(spawnPosition, 0.0f);
+			controlBody->SetTransform(b2Vec2(16,80), 0);
+			controlBody->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+			controlBody->ApplyLinearImpulseToCenter(-impulse, true);
+
+			break;
 		}
 	}
 }
@@ -85,27 +102,8 @@ void Game::InitPhysics()
 	// Crear el suelo y las paredes est�ticas del mundo f�sico
 	b2Body* groundBody = Box2DHelper::CreateStaticBody(phyWorld);
 	b2FixtureDef box = Box2DHelper::CreateRectangularFixtureDef(100, 10, 0.0f, 0.03f, 0.0f);
-	float angle = b2_pi / 12.0f;
 	groundBody->CreateFixture(&box);
-	groundBody->SetTransform(b2Vec2(50.0f, 90.0f), angle);
-	/*
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_staticBody;
-	bodyDef.position = b2Vec2(50, 90);
-	bodyDef.angle = b2_pi / 6.0f;
-	b2Body* groundBody = phyWorld->CreateBody(&bodyDef);
-
-
-	b2PolygonShape boxShape;
-	boxShape.SetAsBox(60.0f, 4.0f);
-
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &boxShape;
-	fixtureDef.density = 0.0f;
-	fixtureDef.friction = 0.5f;
-
-	groundBody->CreateFixture(&fixtureDef);
-	*/
+	groundBody->SetTransform(b2Vec2(50.0f, 100.0f), 0.0f);
 
 	b2Body* ceilingBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 100, 10);
 	ceilingBody->SetTransform(b2Vec2(50.0f, 0.0f), 0.0f);
@@ -116,9 +114,13 @@ void Game::InitPhysics()
 	b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 10, 100);
 	rightWallBody->SetTransform(b2Vec2(100.0f, 50.0f), 0.0f);
 
+	cannonBody = Box2DHelper::CreateRectangularStaticBody(phyWorld, 25, 5);
+	float angle = b2_pi / 1.5f;
+	cannonBody->SetTransform(b2Vec2(10.0f, 90.0f), angle);
+
 	// Crear un c�rculo que se controlar� con el teclado
-	controlBody = Box2DHelper::CreateRectangularDynamicBody(phyWorld, 10, 10, 1, 0, 0);
-	controlBody->SetTransform(b2Vec2(20.0f, 80.0f), 0.0f);
+	controlBody = Box2DHelper::CreateCircularDynamicBody(phyWorld, 2.0f, 1.0f, 0.3f, 0.3f);
+	controlBody->SetTransform(b2Vec2(70.0f, 70.0f), 0.0f);
 }
 
 // Destructor de la clase
